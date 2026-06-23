@@ -1,0 +1,76 @@
+stock_prices = {
+    "TCS": 3500,
+    "INFY": 1600,
+    "RELIANCE": 2900,
+    "ITC": 450,
+    "SBIN": 850
+}
+
+portfolio = {}
+
+while True:
+
+    print("\n" + "=" * 40)
+    print("📈 STOCK PORTFOLIO TRACKER")
+    print("=" * 40)
+    print("1. Show Stocks")
+    print("2. Buy Stock")
+    print("3. View Portfolio")
+    print("4. Exit")
+
+    choice = input("\nEnter Choice: ")
+
+    if choice == "1":
+
+        print("\n📊 AVAILABLE STOCKS")
+        print("-" * 30)
+
+        for stock, price in stock_prices.items():
+            print(f"{stock:<12} ₹{price}")
+
+    elif choice == "2":
+
+        stock = input("Enter Stock Name: ").upper()
+
+        if stock not in stock_prices:
+            print("❌ Stock Not Found")
+            continue
+
+        qty = int(input("Enter Quantity: "))
+
+        portfolio[stock] = portfolio.get(stock, 0) + qty
+
+        print(f"✅ {qty} Shares of {stock} Added")
+
+    elif choice == "3":
+
+        if not portfolio:
+            print("📭 Portfolio Empty")
+            continue
+
+        print("\n📁 MY PORTFOLIO")
+        print("-" * 50)
+
+        total = 0
+
+        for stock, qty in portfolio.items():
+
+            value = qty * stock_prices[stock]
+            total += value
+
+            print(
+                f"{stock:<12}"
+                f"Qty: {qty:<5}"
+                f"Value: ₹{value}"
+            )
+
+        print("-" * 50)
+        print(f"💰 Total Portfolio Value: ₹{total}")
+
+    elif choice == "4":
+
+        print("👋 Thank You!")
+        break
+
+    else:
+        print("❌ Invalid Choice")
